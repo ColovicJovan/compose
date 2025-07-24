@@ -19,7 +19,6 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
 import arrow.core.None
 import arrow.core.Option
-import net.systemvi.configurator.components.design.DesignHoverCard
 import net.systemvi.configurator.components.settings.SettingsHoverCard
 import net.systemvi.configurator.components.tester.TesterHoverCard
 import net.systemvi.configurator.model.*
