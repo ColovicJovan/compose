@@ -26,7 +26,6 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.unit.dp
 import net.systemvi.configurator.components.common.keycaps.FlatKeycap
-import net.systemvi.configurator.model.KeyMap
 import net.systemvi.configurator.model.Keycap
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
@@ -52,7 +51,7 @@ fun KeycapDesign(keycap: Keycap, onDelete: () -> Unit, onRightClick: () -> Unit,
                 onClick = onRightClick
             )
     ) {
-        FlatKeycap(false,false,"A")
+        FlatKeycap(isDown = false, wasDown = false, "A")
         if (isHovered) {
             IconButton(
                 onClick = onDelete,

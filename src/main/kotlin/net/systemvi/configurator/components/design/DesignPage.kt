@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import net.systemvi.configurator.components.common.DraggableList
 import net.systemvi.configurator.components.common.DraggableListDirection
 import net.systemvi.configurator.components.configure.KeycapPosition
+import net.systemvi.configurator.components.design.saved_keymaps.SavedKeymaps
 import net.systemvi.configurator.model.Keycap
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -47,11 +48,12 @@ fun AddRowAndSaveAsButton(rowLimit: Int, oneUSize: Int){
     val keymap = viewModel.keymap
 
     Row(
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ){
         AddRowButton(viewModel::addRow, keymap.keycaps.size>=rowLimit, oneUSize)
         SaveAsButton(keymap, viewModel::setName, keymap.keycaps.flatten().isNotEmpty())
+        SavedKeymaps()
     }
 }
 

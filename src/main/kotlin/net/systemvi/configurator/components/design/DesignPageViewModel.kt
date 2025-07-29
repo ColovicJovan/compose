@@ -2,7 +2,6 @@ package net.systemvi.configurator.components.design
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import arrow.core.right
@@ -16,13 +15,13 @@ import net.systemvi.configurator.model.changeName
 import net.systemvi.configurator.model.keycaps
 import kotlin.collections.plus
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class DesignPageViewModel : ViewModel() {
 
     var selectedKeycap: KeycapPosition? by mutableStateOf(null)
     var showSaveButton by mutableStateOf(false)
     var random = Random
+    var showDetails by mutableStateOf(false)
 
     var keymap by mutableStateOf(KeyMap("", listOf(listOf())))
         private set
