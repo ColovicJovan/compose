@@ -17,7 +17,7 @@ import com.mohamedrejeb.compose.dnd.reorder.ReorderableItemScope
 import com.mohamedrejeb.compose.dnd.reorder.rememberReorderState
 import net.systemvi.configurator.model.Keycap
 
-data class DropInfo(val dragStartIndex:Int,val dragEndIndex:Int)
+data class DropInfo<T>(val dragStartIndex:Int, val dragEndIndex:Int, val copiedItems: List<T>)
 
 enum class DraggableListDirection {
     vertical,
@@ -27,7 +27,7 @@ enum class DraggableListDirection {
 typealias DraggableListItem<T> = @Composable (index:Int, item:T, isSelected:Boolean) -> Unit
 
 @Composable
-fun <T> DraggableList(items: List<T>, key:(T)->Any, onDrop:(dropInfo:DropInfo)->Unit,direction: DraggableListDirection=DraggableListDirection.vertical,itemContent: DraggableListItem<T>){
+fun <T> DraggableList(items: List<T>, key:(T)->Any, onDrop:(dropInfo:DropInfo<T>)->Unit,direction: DraggableListDirection=DraggableListDirection.vertical,itemContent: DraggableListItem<T>){
 
     val reorderState = rememberReorderState<T>()
 
@@ -49,10 +49,9 @@ fun <T> DraggableList(items: List<T>, key:(T)->Any, onDrop:(dropInfo:DropInfo)->
                 data = item,
                 onDrop = { state ->
                     println("onDragEnd")
-                    onDrop(DropInfo(startIndex,index))
+                    onDrop(DropInfo(startIndex, index, draggableItems))
                     selectedItem=null
                     startIndex = 0
-                    draggableItems=items.copy{}
                 },
                 onDragEnter = { state ->
                     if(selectedItem==null){

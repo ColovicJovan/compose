@@ -29,7 +29,9 @@ import net.systemvi.configurator.model.Keycap
         DraggableList(
             items = keymap.keycaps,
             key = {it},
-            onDrop = {}
+            onDrop = {info ->
+                viewModel.reorderRows(info.copiedItems)
+            }
         ){ i, row, isSelected ->
             KeymapRow(row, i, isSelected, keycapLimit, oneUSize)
         }
@@ -73,7 +75,9 @@ fun KeymapRow(row: List<Keycap>, i:Int, isSelected: Boolean, keycapLimit: Int, o
         DraggableList(
             items = row,
             key = {it},
-            onDrop = {},
+            onDrop = {info ->
+                viewModel.reorderKeycaps(info.copiedItems, i)
+            },
             direction = DraggableListDirection.horizontal
         ){ j,keycap, isSelected->
             OneKeycap(keycap, i, j, isSelected, oneUSize)

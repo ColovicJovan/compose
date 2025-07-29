@@ -41,9 +41,9 @@ class DesignPageViewModel : ViewModel() {
         })
     }
 
-    fun removeRow(row: Int){
-        keymap = KeyMap.keycaps.modify(keymap, {keycaps ->
-            keycaps.filterIndexed {index, _ -> index != row}
+    fun removeRow(row: Int) {
+        keymap = KeyMap.keycaps.modify(keymap, { keycaps ->
+            keycaps.filterIndexed { index, _ -> index != row }
         })
     }
 
@@ -51,15 +51,23 @@ class DesignPageViewModel : ViewModel() {
         keymap = KeyMap.keycaps.index(row).modify(keymap, {
             it + Keycap(
                 listOf(allKeys[0].right()),
-                matrixPosition = KeycapMatrixPosition(random.nextInt(),random.nextInt())
+                matrixPosition = KeycapMatrixPosition(random.nextInt(), random.nextInt())
             )
         })
     }
 
-    fun deleteKeycap(row: Int, key: Int){
+    fun deleteKeycap(row: Int, key: Int) {
         keymap = KeyMap.keycaps.index(row).modify(keymap, {
             it.filterIndexed { index, _ -> index != key }
         })
+    }
+
+    fun reorderRows(rows: List<List<Keycap>>) {
+        keymap = KeyMap.keycaps.set(keymap, rows)
+    }
+
+    fun reorderKeycaps(keycaps: List<Keycap>, row: Int) {
+        keymap = KeyMap.keycaps.index(row).set(keymap, keycaps)
     }
 
 }
